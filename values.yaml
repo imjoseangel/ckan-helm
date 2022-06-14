@@ -29,16 +29,16 @@ ckan:
   # ckan.sysadminName -- CKAN system admin username
   sysadminName: "ckan_admin"
   # ckan.sysadminPassword -- CKAN system admin password
-  sysadminPassword: "PasswordHere"
+  sysadminPassword: "ckan_pass"
   # ckan.sysadminApiToken -- CKAN system admin API token
   # Needs to be generated via the CKAN UI and replaced after initial deployment
   sysadminApiToken: "replace_this_with_generated_api_token_for_sysadmin"
   # ckan.sysadminEmail -- CKAN system admin email
   sysadminEmail: "admin@domain.com"
   # ckan.siteTitle -- Site title for the instance
-  siteTitle: "Site Title here"
+  siteTitle: "CKAN Site Title here"
   # ckan.siteId -- Site id
-  siteId: "site-id-here"
+  siteId: "ckan-site-id-here"
   # ckan.siteUrl -- Url for the CKAN instance
   siteUrl: "http://localhost:5000"
   # ckan.ckanPlugins -- List of plugins to be used by the instance
@@ -137,7 +137,7 @@ ckan:
 
 serviceAccount:
   # serviceAccount.create -- Specifies whether a service account should be created
-  create: false
+  create: true
   # serviceAccount.annotations -- Annotations to add to the service account
   annotations: {}
   # serviceAccount.name -- The name of the service account to use.
