@@ -9,7 +9,7 @@ dependencies:
   repository: https://charts.bitnami.com/bitnami
   version: 11.6.6
 - name: datapusher
-  repository: https://keitaro-charts.storage.googleapis.com
+  repository: https://imjoseangel.eu/ckan-helm
   version: 1.0.0
-digest: sha256:d1c5f7fb523d5757abd83527a3ea5e942c5860430767a9c180a0dc7f0815228f
-generated: "2022-06-15T23:14:01.637188+02:00"
+digest: sha256:b8b537bc2e889728fca62722f87ebe1951bef645bd0c512601f0a51d3fa46cb9
+generated: "2022-06-15T23:15:06.788388+02:00"
