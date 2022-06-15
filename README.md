@@ -1,4 +1,4 @@
-#CKAN Helm Chart
+# CKAN Helm Chart
 
 [![License][]][1]
 
