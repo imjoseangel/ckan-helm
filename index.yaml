@@ -3,7 +3,7 @@ entries:
   ckan:
   - apiVersion: v2
     appVersion: 2.9.2
-    created: "2022-06-15T22:59:24.997127+02:00"
+    created: "2022-06-15T23:13:02.785228+02:00"
     dependencies:
     - condition: redis.enabled
       name: redis
@@ -32,7 +32,17 @@ entries:
   datapusher:
   - apiVersion: v2
     appVersion: 0.0.17
-    created: "2022-06-15T22:59:24.99748+02:00"
+    created: "2022-06-15T23:13:02.785607+02:00"
+    description: CKAN Datapusher helm chart
+    digest: f3a6931d507ad59cd43ee227a1e0adfd1c7dafacd7e4631fc65884b12ac6941d
+    name: datapusher
+    type: application
+    urls:
+    - https://imjoseangel.eu/ckan-helm/datapusher-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: 0.0.17
+    created: "2022-06-15T23:13:02.785951+02:00"
     description: CKAN Datapusher helm chart
     digest: 2b2b89349020450bdd2db80807d22ba558f63e7318a307d3e89a04b7b6d2762d
     name: datapusher
@@ -45,7 +55,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 14.3.0
-    created: "2022-06-15T22:59:25.000545+02:00"
+    created: "2022-06-15T23:13:02.789068+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -80,7 +90,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 6.2.7
-    created: "2022-06-15T22:59:25.004352+02:00"
+    created: "2022-06-15T23:13:02.792706+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -113,7 +123,7 @@ entries:
       category: Infrastructure
     apiVersion: v2
     appVersion: 8.11.1
-    created: "2022-06-15T22:59:25.009656+02:00"
+    created: "2022-06-15T23:13:02.797311+02:00"
     dependencies:
     - condition: zookeeper.enabled
       name: zookeeper
@@ -144,4 +154,4 @@ entries:
     urls:
     - https://imjoseangel.eu/ckan-helm/charts/solr-4.1.2.tgz
     version: 4.1.2
-generated: "2022-06-15T22:59:24.980608+02:00"
+generated: "2022-06-15T23:13:02.769422+02:00"
