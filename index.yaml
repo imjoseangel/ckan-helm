@@ -1,0 +1,118 @@
+apiVersion: v1
+entries:
+  datapusher:
+  - apiVersion: v2
+    appVersion: 0.0.17
+    created: "2022-06-15T22:39:46.295806+02:00"
+    description: CKAN Datapusher helm chart
+    digest: 2b2b89349020450bdd2db80807d22ba558f63e7318a307d3e89a04b7b6d2762d
+    name: datapusher
+    type: application
+    urls:
+    - https://imjoseangel.eu/ckan-helm/charts/datapusher-1.0.0.tgz
+    version: 1.0.0
+  postgresql:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 14.3.0
+    created: "2022-06-15T22:39:46.299314+02:00"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: PostgreSQL (Postgres) is an open source object-relational database
+      known for reliability and data integrity. ACID-compliant, it supports foreign
+      keys, joins, views, triggers and stored procedures.
+    digest: 286c3bbb4b9fcb93033b1b570e843713c89b86a63730178b0cccc4693e06f63d
+    home: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+    icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-220x234.png
+    keywords:
+    - postgresql
+    - postgres
+    - database
+    - sql
+    - replication
+    - cluster
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: postgresql
+    sources:
+    - https://github.com/bitnami/bitnami-docker-postgresql
+    - https://www.postgresql.org/
+    urls:
+    - https://imjoseangel.eu/ckan-helm/charts/postgresql-11.6.6.tgz
+    version: 11.6.6
+  redis:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 6.2.7
+    created: "2022-06-15T22:39:46.304702+02:00"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: Redis(R) is an open source, advanced key-value store. It is often
+      referred to as a data structure server since keys can contain strings, hashes,
+      lists, sets and sorted sets.
+    digest: b5092fc5fc0e9852ab4f728aa836fb71f9f15151c1c3f0b7b1d24220cbd47eeb
+    home: https://github.com/bitnami/charts/tree/master/bitnami/redis
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: redis
+    sources:
+    - https://github.com/bitnami/bitnami-docker-redis
+    urls:
+    - https://imjoseangel.eu/ckan-helm/charts/redis-16.12.1.tgz
+    version: 16.12.1
+  solr:
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: 8.11.1
+    created: "2022-06-15T22:39:46.309637+02:00"
+    dependencies:
+    - condition: zookeeper.enabled
+      name: zookeeper
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.x.x
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: Apache Solr is an extremely powerful, open source enterprise search
+      platform built on Apache Lucene. It is highly reliable and flexible, scalable,
+      and designed to add value very quickly after launch.
+    digest: 881c9172905e48a0c9ac3d9b9044f26e328c57d189e76a858b6a737357ed4aa1
+    home: https://github.com/bitnami/charts/tree/master/bitnami/solr
+    icon: https://bitnami.com/assets/stacks/solr/img/solr-stack-220x234.png
+    keywords:
+    - solr
+    - zookeeper
+    - apache
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: solr
+    sources:
+    - https://github.com/bitnami/bitnami-docker-solr
+    - https://lucene.apache.org/solr/
+    urls:
+    - https://imjoseangel.eu/ckan-helm/charts/solr-4.1.2.tgz
+    version: 4.1.2
+generated: "2022-06-15T22:39:46.295313+02:00"
