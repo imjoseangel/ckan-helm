@@ -36,7 +36,7 @@ master_passwd = os.environ.get('PSQL_PASSWD', '')
 master_database = os.environ.get('PSQL_DB', '')
 
 
-class DB_Params:
+class DBParams:
     def __init__(self, conn_str):
         self.db_user = make_url(conn_str).username
         self.db_passwd = make_url(conn_str).password
@@ -182,9 +182,9 @@ if master_user == '' or master_passwd == '' or master_database == '':
 
 print("Master DB: " + master_database + " Master User: " + master_user)
 
-ckan_db = DB_Params(ckan_conn_str)
-datastorerw_db = DB_Params(datastorerw_conn_str)
-datastorero_db = DB_Params(datastorero_conn_str)
+ckan_db = DBParams(ckan_conn_str)
+datastorerw_db = DBParams(datastorerw_conn_str)
+datastorero_db = DBParams(datastorero_conn_str)
 
 
 # Check to see whether we can connect to the database, exit after 10 mins
@@ -216,21 +216,21 @@ except psycopg2.DatabaseError as e:
     print("ERROR DB: ", e)
 
 # replace ckan.plugins so that ckan cli can run and apply datastore permissions
-sed_string = "s/ckan.plugins =.*/ckan.plugins = \
-    envvars image_view text_view recline_view datastore/g"  # noqa
-subprocess.Popen(["/bin/sed", sed_string, "-i", "/srv/app/production.ini"])
-sql = subprocess.check_output(["ckan",
+SED_STRING = ("s/ckan.plugins =.*/ckan.plugins ="
+              "envvars image_view text_view recline_view datastore/g")
+subprocess.Popen(["/bin/sed", SED_STRING, "-i", "/srv/app/production.ini"])
+SQL = subprocess.check_output(["ckan",
                                "-c", "/srv/app/production.ini",
                                "datastore",
                                "set-permissions"],
                               stderr=subprocess.PIPE)
-sql = sql.decode('utf-8')
-sql = sql.replace("@" + datastorerw_db.db_host, "")
+SQL = SQL.decode('utf-8')
+SQL = SQL.replace("@" + datastorerw_db.db_host, "")
 
 # Remove the connect clause from the output
-sql = re.sub('\\\\connect \"(.*)\"', '', sql)
+SQL = re.sub('\\\\connect \"(.*)\"', '', SQL)
 
 try:
-    set_datastore_permissions(datastorerw_db, datastorero_db, sql)
+    set_datastore_permissions(datastorerw_db, datastorero_db, SQL)
 except psycopg2.DatabaseError as e:
     print("ERROR DB: ", e)
