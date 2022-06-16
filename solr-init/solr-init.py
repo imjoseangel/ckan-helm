@@ -90,14 +90,11 @@ def prepare_configset(cfsetname):
     url = solr_url + '/solr/admin/configs?action=UPLOAD&name=' + cfsetname
     print("Trying: " + url)
     try:
-        res = requests.post(url,
-                            data=data,
-                            headers={'Content-Type':
-                                     'application/octet-stream'})
+        requests.post(url,
+                      data=data,
+                      headers={'Content-Type':
+                               'application/octet-stream'})
     except requests.exceptions.RequestException as e:
-        print('HTTP Status: ' + str(res.status_code) +
-              ' Reason: ' + res.reason)
-        print('HTTP Response: \n' + res.text)
         print((str(e)))
         print("\nConfigset exists - will be used for creating the collection.")
 
@@ -114,11 +111,8 @@ def create_solr_collection(name, cfsetname, numshards, replfactor,
     url = url + '&collection.configName=' + cfsetname
     print("Trying: " + url)
     try:
-        res = requests.post(url)
+        requests.post(url)
     except requests.exceptions.RequestException as e:
-        print('HTTP Status: ' + str(res.status_code) +
-              ' Reason: ' + res.reason)
-        print('HTTP Response: \n' + res.text)
         print((str(e)))
         print("\nAborting...")
         sys.exit(3)
@@ -133,9 +127,6 @@ def solr_collection_alreadyexists(solrurl):
     try:
         res = requests.post(url)
     except requests.exceptions.RequestException as e:
-        print('HTTP Status: ' + str(res.status_code) +
-              ' Reason: ' + res.reason)
-        print('HTTP Response: \n' + res.text)
         print((str(e)))
         print("\nAborting...")
         sys.exit(4)
