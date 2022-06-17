@@ -66,7 +66,7 @@ RUN pip wheel --wheel-dir=/wheels uwsgi==2.0.19.1 gevent==21.1.2 greenlet==1.1.0
 ###########################
 ### Default-Extensions ####
 ###########################
-FROM alpine:3.13.7 as extbuild
+FROM alpine:3.16.0 as extbuild
 
 # Set src dirs
 ENV SRC_DIR=/srv/app/src
