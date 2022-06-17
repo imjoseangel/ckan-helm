@@ -4,12 +4,12 @@
 FROM alpine:3.13.7 as build
 
 # Used by Github Actions to tag the image with
-ENV IMAGE_TAG=0.0.17
+ENV IMAGE_TAG=0.0.18
 
 # Set datapusher version to build
-ENV GIT_URL https://github.com/keitaroinc/datapusher.git
+ENV GIT_URL https://github.com/ckan/datapusher.git
 ENV GIT_BRANCH master
-ENV REQUIREMENTS_URL https://raw.githubusercontent.com/keitaroinc/datapusher/${GIT_BRANCH}/requirements.txt
+ENV REQUIREMENTS_URL https://raw.githubusercontent.com/ckan/datapusher/${GIT_BRANCH}/requirements.txt
 
 # Set src dirs
 ENV SRC_DIR=/srv/app/src
@@ -46,7 +46,7 @@ RUN curl -o ${SRC_DIR}/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
 
 # Fetch and build datapusher and requirements
 RUN pip wheel --wheel-dir=/wheels git+${GIT_URL}@${GIT_BRANCH}#egg=datapusher
-RUN pip wheel --wheel-dir=/wheels -r ${REQUIREMENTS_URL} 
+RUN pip wheel --wheel-dir=/wheels -r ${REQUIREMENTS_URL}
 RUN curl -o /wheels/requirements.txt ${REQUIREMENTS_URL}
 
 # Get uwsgi and gevent from pip
