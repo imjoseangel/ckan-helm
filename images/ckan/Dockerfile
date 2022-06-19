@@ -1,7 +1,7 @@
 ##################
 ### Build CKAN ###
 ##################
-FROM alpine:3.16.0 as ckanbuild
+FROM python:3.8-alpine as ckanbuild
 
 # Used by Github Actions to tag the image with
 ENV IMAGE_TAG=1.0.0
@@ -18,8 +18,6 @@ WORKDIR ${SRC_DIR}
 
 # Packages to build CKAN requirements and plugins
 RUN apk add --no-cache \
-    python3 \
-    python3-dev \
     git \
     curl \
     postgresql-dev \
@@ -38,15 +36,11 @@ RUN apk add --no-cache \
     libxml2-dev \
     libxslt-dev
 
-# Link python to python3
-RUN ln -s /usr/bin/python3 /usr/bin/python
-
 # Create the src directory
 RUN mkdir -p ${SRC_DIR}
 
-# Install pip
-RUN curl -o ${SRC_DIR}/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
-    python ${SRC_DIR}/get-pip.py
+# Upgrade pip
+RUN pip install --upgrade pip
 
 # Downgrade setuptools so that CKAN requirements can be built
 RUN pip install setuptools==44.1.0
@@ -60,13 +54,12 @@ COPY ./scripts/apply_ckan_patches.sh ${SRC_DIR}/apply_ckan_patches.sh
 RUN sh ${SRC_DIR}/apply_ckan_patches.sh
 RUN rm -rf /srv/app/src/ckan/.git
 RUN pip wheel --wheel-dir=/wheels -r ckan/requirements.txt
-RUN pip wheel --wheel-dir=/wheels uwsgi==2.0.19.1 gevent==21.1.2 greenlet==1.1.0
-
+RUN pip wheel --wheel-dir=/wheels uwsgi==2.0.20 gevent==21.12.0 greenlet==1.1.2
 
 ###########################
 ### Default-Extensions ####
 ###########################
-FROM alpine:3.16.0 as extbuild
+FROM python:3.8-alpine as extbuild
 
 # Set src dirs
 ENV SRC_DIR=/srv/app/src
@@ -80,20 +73,15 @@ ENV ENVVARS_GIT_URL=https://github.com/okfn/ckanext-envvars
 ENV ENVVARS_GIT_BRANCH=0.0.1
 
 RUN apk add --no-cache \
-    python3 \
     python3-dev \
     git \
-    curl 
-
-# Link python to python3
-RUN ln -s /usr/bin/python3 /usr/bin/python
+    curl
 
 # Create the src directory
 RUN mkdir -p ${SRC_DIR}
 
-# Install pip
-RUN curl -o ${SRC_DIR}/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
-    python ${SRC_DIR}/get-pip.py
+# Upgrade pip
+RUN pip install --upgrade pip
 
 # Fetch and build the default CKAN extensions
 RUN pip wheel --wheel-dir=/wheels git+${ENVVARS_GIT_URL}@${ENVVARS_GIT_BRANCH}#egg=ckanext-envvars
@@ -101,7 +89,7 @@ RUN pip wheel --wheel-dir=/wheels git+${ENVVARS_GIT_URL}@${ENVVARS_GIT_BRANCH}#e
 ############
 ### MAIN ###
 ############
-FROM alpine:3.16.0
+FROM python:3.8-alpine
 
 LABEL maintainer="imjoseangel"
 LABEL org.opencontainers.image.source https://github.com/imjoseangel/ckan-helm
@@ -116,7 +104,6 @@ ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher
 
 # Install necessary packages to run CKAN
 RUN apk add --no-cache \
-    python3 \
     bash \
     git \
     gettext \
@@ -127,15 +114,13 @@ RUN apk add --no-cache \
     libxslt \
     libxml2 \
     tzdata \
-    apache2-utils && \
-    # Create SRC_DIR
-    mkdir -p ${SRC_DIR} && \
-    # Link python to python3
-    ln -s /usr/bin/python3 /usr/bin/python
+    apache2-utils
 
-# Install pip
-RUN curl -o ${SRC_DIR}/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
-    python ${SRC_DIR}/get-pip.py
+# Create the src directory
+RUN mkdir -p ${SRC_DIR}
+
+# Upgrade pip
+RUN pip install --upgrade pip
 
 # Get artifacts from build stages
 COPY --from=ckanbuild /wheels /srv/app/wheels
@@ -143,7 +128,7 @@ COPY --from=extbuild /wheels /srv/app/ext_wheels
 COPY --from=ckanbuild /srv/app/src/ckan ${CKAN_DIR}
 
 # Additional install steps for build stages artifacts
-RUN pip install --no-index --find-links=/srv/app/wheels uwsgi==2.0.19.1 gevent==21.1.2
+RUN pip install --no-index --find-links=/srv/app/wheels uwsgi==2.0.20 gevent==21.12.0
 
 # Create a local user and group to run the app
 RUN addgroup -g 92 -S ckan && \
