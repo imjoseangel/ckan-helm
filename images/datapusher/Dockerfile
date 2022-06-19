@@ -1,7 +1,7 @@
 #############
 ### Build ###
 #############
-FROM alpine:3.16.0 as build
+FROM python:3.8-alpine as build
 
 # Used by Github Actions to tag the image with
 ENV IMAGE_TAG=0.0.18
@@ -19,7 +19,6 @@ WORKDIR ${SRC_DIR}
 
 # Packages to build datapusher
 RUN apk add --no-cache \
-    python3 \
     curl \
     gcc \
     make \
@@ -40,9 +39,8 @@ RUN apk add --no-cache \
 # Create the src directory
 RUN mkdir -p ${SRC_DIR}
 
-# Install pip
-RUN curl -o ${SRC_DIR}/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
-    python3 ${SRC_DIR}/get-pip.py
+# Upgrade pip
+RUN pip install --upgrade pip
 
 # Fetch and build datapusher and requirements
 RUN pip wheel --wheel-dir=/wheels git+${GIT_URL}@${GIT_BRANCH}#egg=datapusher
@@ -50,13 +48,12 @@ RUN pip wheel --wheel-dir=/wheels -r ${REQUIREMENTS_URL}
 RUN curl -o /wheels/requirements.txt ${REQUIREMENTS_URL}
 
 # Get uwsgi and gevent from pip
-RUN pip wheel --wheel-dir=/wheels uwsgi==2.0.20 gevent==21.12.0 greenlet=1.1.2
-
+RUN pip wheel --wheel-dir=/wheels uwsgi==2.0.20 gevent==21.12.0 greenlet==1.1.2
 
 ############
 ### MAIN ###
 ############
-FROM alpine:3.16.0
+FROM python:3.8-alpine
 
 LABEL maintainer="imjoseangel"
 LABEL org.opencontainers.image.source https://github.com/imjoseangel/ckan-helm
@@ -67,14 +64,12 @@ ENV JOB_CONFIG ${APP_DIR}/datapusher_settings.py
 WORKDIR ${APP_DIR}
 
 RUN apk add --no-cache \
-    python3 \
     curl \
     libmagic \
     libxslt
 
-# Install pip
-RUN curl -o /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
-    python3 /tmp/get-pip.py
+# Upgrade pip
+RUN pip install --upgrade pip
 
 # Get artifacts from build stages
 COPY --from=build /wheels /srv/app/wheels
