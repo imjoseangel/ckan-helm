@@ -19,7 +19,7 @@ entries:
       version: 11.x.x
     - condition: datapusher.enabled
       name: datapusher
-      repository: https://keitaro-charts.storage.googleapis.com
+      repository: https://imjoseangel.eu/ckan-helm
       version: 1.0.0
     description: CKAN Helm chart
     digest: be8415163482671854566b507fd1a1b10ed9ba263d0d251f773c7a4c88af3a14
