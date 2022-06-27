@@ -31,7 +31,7 @@ entries:
     version: 0.0.1
   datapusher:
   - apiVersion: v2
-    appVersion: 0.0.17
+    appVersion: 0.0.18
     created: "2022-06-27T22:23:45.544371+02:00"
     description: CKAN Datapusher helm chart
     digest: 03c72f260e1aeec1e1b8a2168a4b243e0cbb2a680a94f5ca18edd018caee2ff1
