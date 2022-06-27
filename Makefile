@@ -20,4 +20,7 @@ all: build
 .PHONY: build
 build: ## Build Helm
 		$(info Make: Build Helm)
-		@pip install --upgrade -r requirements.txt
+		@helm package dependency-charts/datapusher/
+		@helm package .
+		@mkdir -p docs
+		@mv *.tgz docs/
