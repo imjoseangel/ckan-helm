@@ -24,3 +24,7 @@ build: ## Build Helm
 		@helm package .
 		@mkdir -p docs
 		@mv *.tgz docs/
+
+chart: ## Build Chart
+		$(info Make: Build Chart)
+		@helm repo index --url https://imjoseangel.eu/ckan-helm/ docs/
