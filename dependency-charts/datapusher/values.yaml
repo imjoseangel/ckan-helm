@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: imjoseangel/ckan-datapusher
-  tag: 0.0.17
+  tag: 0.0.18
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
