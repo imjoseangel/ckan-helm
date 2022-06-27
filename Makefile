@@ -28,3 +28,11 @@ build: ## Build Helm
 chart: ## Build Chart
 		$(info Make: Build Chart)
 		@helm repo index --url https://imjoseangel.eu/ckan-helm/ docs/
+
+merge: ## Merge Chart
+		$(info Make: Merge Chart)
+		@helm repo index --url https://imjoseangel.eu/ckan-helm/ --merge index.yaml docs/
+
+lint: ## Lint Chart
+		$(info Make: Lint Chart)
+		@helm lint .
