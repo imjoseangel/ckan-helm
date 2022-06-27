@@ -3,7 +3,7 @@ entries:
   ckan:
   - apiVersion: v2
     appVersion: 2.9.2
-    created: "2022-06-16T19:19:20.757447+02:00"
+    created: "2022-06-27T22:23:45.543837+02:00"
     dependencies:
     - condition: redis.enabled
       name: redis
@@ -22,7 +22,7 @@ entries:
       repository: https://imjoseangel.eu/ckan-helm
       version: 1.0.0
     description: CKAN Helm chart
-    digest: be8415163482671854566b507fd1a1b10ed9ba263d0d251f773c7a4c88af3a14
+    digest: 737b7e457fd5c6e126f2d9ee3a7ae72ce88e2393e0685fa2262ae894a3bb7fa4
     icon: https://github.com/imjoseangel/ckan-helm/raw/devel/icon/250_logo-ckan.jpg
     name: ckan
     type: application
@@ -32,12 +32,12 @@ entries:
   datapusher:
   - apiVersion: v2
     appVersion: 0.0.17
-    created: "2022-06-16T19:19:20.757768+02:00"
+    created: "2022-06-27T22:23:45.544371+02:00"
     description: CKAN Datapusher helm chart
-    digest: f3a6931d507ad59cd43ee227a1e0adfd1c7dafacd7e4631fc65884b12ac6941d
+    digest: 03c72f260e1aeec1e1b8a2168a4b243e0cbb2a680a94f5ca18edd018caee2ff1
     name: datapusher
     type: application
     urls:
     - https://imjoseangel.eu/ckan-helm/datapusher-1.0.0.tgz
     version: 1.0.0
-generated: "2022-06-16T19:19:20.739919+02:00"
+generated: "2022-06-27T22:23:45.523167+02:00"
