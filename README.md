@@ -2,6 +2,8 @@
 
 [![License][]][1]
 
+[![pages-build-deployment](https://github.com/imjoseangel/ckan-helm/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/imjoseangel/ckan-helm/actions/workflows/pages/pages-build-deployment)
+
 A Helm chart for CKAN - The world’s leading open source data management system - https://ckan.org/
 
 Current chart version is `0.0.1`
