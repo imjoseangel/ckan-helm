@@ -42,5 +42,6 @@ buildx: ## Build Dockerfile
 		@docker buildx create --name buildx --driver-opt network=host --use
 		@docker buildx inspect --bootstrap
 		@docker buildx build -t imjoseangel/ckan:0.0.1 --platform linux/amd64 --platform linux/arm64 --file Dockerfile --push .
+		@docker buildx build -t imjoseangel/ckan-datapusher:0.0.18 --platform linux/amd64 --platform linux/arm64 --file Dockerfile --push .
 		@docker buildx imagetools inspect imjoseangel/ckan:0.0.1
 		@docker buildx rm buildx
