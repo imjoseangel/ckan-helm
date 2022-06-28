@@ -1,6 +1,7 @@
 ##################
 ### Build CKAN ###
 ##################
+ARG build_for=linux/amd64,linux/arm64
 FROM python:3.8-alpine as ckanbuild
 
 # Used by Github Actions to tag the image with
